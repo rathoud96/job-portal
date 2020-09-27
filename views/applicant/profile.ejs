@@ -1,0 +1,40 @@
+<%- include('../partials/header'); %>
+
+<div class="container">
+  <form action="/applicant/<%= applicant._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">Name</label>
+      <input type="text" class="form-control" name="applicant[name]" rows="3" value="<%= applicant.name %>">
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">Job summary</label>
+      <textarea type="text" class="form-control" name="applicant[jobSummary]" rows="3" ><%= applicant.jobSummary %></textarea>
+    </div>
+    <div class="form-group">
+      <label for="formGroupExampleInput">Location</label>
+      <input type="text" class="form-control" name="applicant[location]" value="<%= applicant.location %>">
+    </div>
+    <div class="form-group">
+      <label for="formGroupExampleInput">Role</label>
+      <input type="text" class="form-control" name="applicant[role]" aria-describedby="emailHelp" value="<%= applicant.role %>">
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlFile1">Example file input</label>
+      <input type="file" class="form-control-file" id="resumeFile" name="file">
+    </div>
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" name="exampleCheck1">
+      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+<script>
+  function readSingleFile(e) {
+    const name = e[0].name;
+    document.getElementById("resumeFile").textContent = name;
+  }
+</script>
+
+<%- include('../partials/footer'); %>
