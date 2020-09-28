@@ -23,8 +23,9 @@ var applicantSchema = new mongoose.Schema({
   companies: [{
     id: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Company"},
-      companyName: String
+      ref: "Company"
+    },
+    companyName: String
     }
   ]
 });

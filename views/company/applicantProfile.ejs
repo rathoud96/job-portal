@@ -1,0 +1,28 @@
+<%- include('../partials/header'); %>
+<div class="container" style="margin-top: 10px;">
+  <div class="col-md-3 col-sm-6">
+    <div style="display: flex; justify-content: start; flex-direction: row;">
+      <h2 style="margin-right: 50px;" for="exampleFormControlSelect1">Name</h2>
+      <h2 style="margin-left: 40px;"><%= applicant.name %></h2>
+    </div>
+    <hr>
+    <div style="display: flex; justify-content: start; flex-direction: row;">
+      <h2 style="margin-right: 50px;" for="exampleFormControlSelect1">Summary</h2>
+      <p style="margin-left: 20px; width: 200px;"><%= applicant.jobSummary %></p>
+    </div>
+    <hr>
+    <div style="display: flex; justify-content: start; flex-direction: row;">
+      <h2 style="margin-right: 50px;" for="exampleFormControlSelect1">Role</h2>
+      <h2 style="margin-left: 20px;"><%= applicant.role %></h2>
+    </div>
+    <hr>
+    <div style="display: flex; justify-content: start; flex-direction: row;">
+      <h2 style="margin-right: 50px;" for="exampleFormControlSelect1">Location</h2>
+      <h2 style="margin-left: 20px;"><%= applicant.location %></h2>
+    </div>
+    <hr>
+    <a class="btn btn-primary" href="/applicant/<%= applicant._id %>/resume" target="_blank">resume</a>
+  </div>
+</div>
+
+<%- include('../partials/footer'); %>

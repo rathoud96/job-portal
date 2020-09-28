@@ -67,10 +67,11 @@ router.post("/register", function(req, res){
 router.put("/:id", upload.single('file'), function(req, res){
   console.log(req.file)
   Applicant.findById(req.params.id, function(err, applicant){
+    if(req.file){
     applicant.resume = {
       data: fs.readFileSync(path.join(__dirname, '../', '/resume/' + req.file.filename)),
       contentType: 'application/pdf'
-    }
+    }}
     applicant.jobSummary = req.body.applicant.jobSummary
     applicant.location = req.body.applicant.location
     applicant.role = req.body.applicant.role

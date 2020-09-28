@@ -1,11 +1,12 @@
 <%- include('../partials/header'); %>
 
 <div class="container">
-  <div class="col-md-3 col-sm-6">
+    <div class="row text-center " style="display:flex; flex-wrap:wrap;">
     <% companies.forEach(function(company){ %>
+      <div class="col-md-3 col-sm-6" style="margin: 10px;">
       <div class="card" style="width: 18rem;">
         <div class="card-body">
-          <h5 class="card-title"><%= company.companyName %></h5>
+          <h3 class="card-title"><%= company.companyName %></h3>
           <p class="card-text"><%= company.jobDescription %></p>
           <form action="/company/<%= company._id %>?_method=PUT" method="POST">
             <div class="form-group" style="display: none;">
@@ -20,7 +21,9 @@
           </form>
         </div>
       </div>
+      </div>
     <% }) %>
+    </div>
   </div>
 </div>
 <%- include('../partials/footer'); %>

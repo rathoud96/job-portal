@@ -25,6 +25,14 @@ router.get("/:id/profile",function(req, res){
   })
 });
 
+router.get("/:id/applicantProfile/:applicant_id",function(req, res){
+  Company.findById(req.params.id, function(err, company){
+    Applicant.findById(req.params.applicant_id, function(err, applicant){
+      res.render("company/applicantProfile", {currentUser: req.user, company: company, applicant: applicant});
+    })
+  })
+});
+
 router.post("/register",function(req, res){
   console.log(req.body)
   console.log(req.user)
