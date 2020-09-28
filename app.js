@@ -15,6 +15,7 @@ const express     = require("express"),
     dotenv.config();
 
 const mongoURI = process.env.MONGO_URI
+console.log(mongoURI)
 
 mongoose.connect(mongoURI, { 
   useNewUrlParser: true, useUnifiedTopology: true
@@ -48,6 +49,6 @@ app.use("/", indexRoute);
 app.use("/company", companyRoute);
 app.use("/applicant", applicantRoute);
 
-app.listen(4000, function(){
+app.listen(process.env.PORT || 4000, function(){
 	console.log("server has started!");
 });
