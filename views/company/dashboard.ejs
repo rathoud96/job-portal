@@ -3,11 +3,19 @@
   <div class="row text-center " style="display:flex; flex-wrap:wrap;">
     <% company.applicants.forEach(function(applicant){ %>
       <div class="col-md-3 col-sm-6" style="margin: 10px;">
-      <div class="card" style="width: 18rem;">
+      <div class="card">
         <div class="card-body">
           <h5 class="card-title"><%= applicant.name %></h5>
-          <p class="card-text"><%= applicant.jobSummary %></p>
-          <a href="/company/<%=company._id %>/applicantProfile/<%= applicant.id %>" class="btn btn-primary">View profile</a>
+          <p class="card-text">Stage: <%= applicant.stage %></p>
+          <p class="card-text">Feedback: <%= applicant.feedback %></p>
+          <div class="row text-center " style="display:flex; flex-wrap:wrap;">
+          <div class="col-md-3 col-sm-6" style="margin: 10px;">
+            <a href="/company/<%=company._id %>/applicantProfile/<%= applicant.id %>" class="btn btn-primary">View profile</a>
+          </div>
+          <div class="col-md-3 col-sm-6" style="margin: 10px;">
+          <a href="/company/<%=company._id %>/applicantInterview/<%= applicant.id %>" class="btn btn-primary">Schedule Interview</a>
+          </div>
+          </div>
         </div>
       </div>
     </div>

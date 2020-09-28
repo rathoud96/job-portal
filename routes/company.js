@@ -33,6 +33,26 @@ router.get("/:id/applicantProfile/:applicant_id",function(req, res){
   })
 });
 
+router.put("/:id/applicantInterview/:applicant_id",function(req, res){
+  Company.findById(req.params.id, function(err, company){
+      company.applicants.forEach(applicant => {
+        if(applicant.id == req.params.applicant_id){
+          applicant.stage = req.body.stage
+          applicant.feedback = req.body.feedback
+        }});
+        company.save();
+      res.render("company/dashboard", {currentUser: req.user, company: company});
+  })
+});
+
+router.get("/:id/applicantInterview/:applicant_id",function(req, res){
+  Company.findById(req.params.id, function(err, company){
+    Applicant.findById(req.params.applicant_id, function(err, applicant){
+      res.render("company/interview", {currentUser: req.user, company: company, applicant: applicant});
+    })
+  })
+});
+
 router.post("/register",function(req, res){
   console.log(req.body)
   console.log(req.user)

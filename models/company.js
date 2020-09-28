@@ -13,7 +13,9 @@ var CompanySchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Applicant"
       },
-      name: String
+      name: String,
+      stage: String,
+      feedback: String
     }
   ],
   creator: {
