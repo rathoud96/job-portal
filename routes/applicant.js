@@ -4,14 +4,11 @@ var express = require("express"),
     Applicant  = require("../models/applicant"),
     mongoose = require("mongoose"),
     multer = require("multer"),
-    GridFsStorage = require("multer-gridfs-storage"),
     Company  = require("../models/company"),
     fs = require('fs'),
     passport  = require("passport")
     multer = require("multer"),
     path = require('path'); 
-
-const mongoURI = "mongodb://localhost/job_portal"
 
 var storage = multer.diskStorage({
   destination: './resume/',
