@@ -6,10 +6,21 @@ var express = require("express"),
     multer = require("multer"),
     GridFsStorage = require("multer-gridfs-storage"),
     Company  = require("../models/company"),
-    passport  = require("passport");
+    fs = require('fs'),
+    passport  = require("passport")
+    multer = require("multer"),
+    path = require('path'); 
 
 const mongoURI = "mongodb://localhost/job_portal"
-const upload = require("../middleware/upload");
+
+var storage = multer.diskStorage({
+  destination: './resume/',
+  filename: function (req, file, cb) {
+    cb(null, file.originalname + '-' + Date.now()+ '.pdf')
+  }
+})
+
+const upload = multer({ storage: storage });
 
 router.get("/",function(req, res){
 	Applicant.find({},function(err, allApplicants){
@@ -53,18 +64,16 @@ router.post("/register", function(req, res){
 	});
 });
 
-router.put("/:id",async function(req, res){
-  console.log(req)
-  await upload(req, res);
-  // console.log(req.body);
-  //   if (req.file == undefined) {
-  //     return res.send(`You must select a file.`);
-  //   }
+router.put("/:id", upload.single('file'), function(req, res){
+  console.log(req.file)
   Applicant.findById(req.params.id, function(err, applicant){
+    applicant.resume = {
+      data: fs.readFileSync(path.join(__dirname, '../', '/resume/' + req.file.filename)),
+      contentType: 'application/pdf'
+    }
     applicant.jobSummary = req.body.applicant.jobSummary
     applicant.location = req.body.applicant.location
     applicant.role = req.body.applicant.role
-    applicant.resume = "filename.pdf"
     applicant.save()
 
     User.findById(applicant.user.id, function(err, user){
@@ -74,5 +83,12 @@ router.put("/:id",async function(req, res){
     })
   })
 });
+
+router.get("/:id/resume", function(req, res){
+  Applicant.findById(req.params.id, function(err, applicant){
+    res.contentType(applicant.resume.contentType);
+    res.send(applicant.resume.data);
+  });
+})
 
 module.exports = router

@@ -5,13 +5,16 @@ const express     = require("express"),
     LocalStrategy = require("passport-local"),
     mongoose      = require("mongoose"),
     User          = require("./models/user"),
+    dotenv        = require('dotenv'),
     methodOverride = require("method-override");
 
     var indexRoute    = require("./routes/index"),
     companyRoute = require("./routes/company"),
     applicantRoute = require("./routes/applicant");
 
-const mongoURI = "mongodb://localhost/job_portal"
+    dotenv.config();
+
+const mongoURI = process.env.MONGO_URI
 
 mongoose.connect(mongoURI, { 
   useNewUrlParser: true, useUnifiedTopology: true

@@ -4,7 +4,11 @@ var applicantSchema = new mongoose.Schema({
 	name: String,
   skills: [String],
   experience: Number,
-  resume: String,
+  filename: String,
+  resume: { 
+    data: Buffer, 
+    contentType: String 
+  } ,
   email: String,
   jobSummary: String,
   location: String,
